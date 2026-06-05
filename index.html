@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Max's Library of Cool Builds</title>
+<meta name="description" content="Scrapers, lead-finders, a proposal builder, sales tools, an AI video generator, and a mobile game. Most of it can be bent to fit your business." />
+<meta property="og:title" content="Max's Library of Cool Builds" />
+<meta property="og:description" content="Everything I've shipped. Most of it can be bent to fit your business. Some of it you can just grab and go." />
+<meta property="og:type" content="website" />
+<!-- <meta property="og:image" content="https://yourdomain.com/og-image.jpg" /> -->
+<!-- <meta property="og:url" content="https://yourdomain.com" /> -->
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  /* ============================================================
+     CONFIG (email + form endpoint) is in the <script> at the bottom.
+     Swap each .thumb block for your own <img> thumbnail when ready.
+     ============================================================ */
+  :root{
+    --bg:#fbfaf7; --band:#f1ece2; --band2:#f6f2ea; --card:#ffffff;
+    --ink:#1c1a17; --muted:#6f6b63; --faint:#a6a199;
+    --line:rgba(0,0,0,.09); --line2:rgba(0,0,0,.14);
+    --btn:#1c1a17;
+    --leadgen:#bf6a35; --productivity:#4e8d6e; --content:#a9842f; --games:#bd5772;
+    --maxw:1140px; --radius:20px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  html{scroll-behavior:smooth; -webkit-text-size-adjust:100%}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:'Schibsted Grotesk',sans-serif; line-height:1.55;
+    -webkit-font-smoothing:antialiased; letter-spacing:-.005em; overflow-x:hidden;
+  }
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 26px}
+  @media(max-width:600px){.wrap{padding:0 18px}}
+  a{color:inherit; text-decoration:none}
+  .label{font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--faint); font-weight:600}
+
+  /* ---------- top bar ---------- */
+  header.bar{position:sticky; top:0; z-index:50; background:rgba(251,250,247,.8); backdrop-filter:saturate(160%) blur(14px); -webkit-backdrop-filter:saturate(160%) blur(14px); border-bottom:1px solid var(--line)}
+  .bar-inner{display:flex; align-items:center; justify-content:space-between; height:60px}
+  .brand{font-weight:700; font-size:15px; letter-spacing:-.01em; cursor:pointer}
+  .brand span{color:var(--faint); font-weight:500}
+  .pill{font-size:13.5px; font-weight:600; border-radius:999px; padding:10px 18px; cursor:pointer; border:1px solid transparent; transition:transform .18s, background .18s, color .18s; background:var(--btn); color:#fff; -webkit-tap-highlight-color:transparent}
+  .pill:active{transform:scale(.97)}
+  @media(hover:hover){.pill:hover{transform:translateY(-1px)}}
+  .pill.ghost{background:transparent; color:var(--ink); border-color:var(--line2)}
+  @media(hover:hover){.pill.ghost:hover{background:var(--ink); color:#fff; border-color:var(--ink)}}
+
+  /* ---------- hero ---------- */
+  .hero{padding:88px 0 56px; max-width:880px}
+  @media(max-width:600px){.hero{padding:56px 0 40px}}
+  .hero .label{margin-bottom:24px}
+  h1{font-weight:800; font-size:clamp(38px,7.5vw,82px); line-height:1.02; letter-spacing:-.035em}
+  h1 em{font-style:normal; color:var(--muted)}
+  .hero .desc{font-size:clamp(17px,2.3vw,22px); color:var(--muted); margin-top:26px; max-width:720px; line-height:1.5}
+  .hero .desc b{color:var(--ink); font-weight:600}
+  .bio{margin-top:28px; font-size:15.5px; color:var(--muted); display:flex; align-items:center; gap:12px; flex-wrap:wrap}
+  .bio .langs{font-weight:700; color:var(--ink); border:1px solid var(--line2); border-radius:999px; padding:6px 13px; font-size:13px; letter-spacing:.04em}
+
+  /* ---------- tabs ---------- */
+  .tabsrow{position:sticky; top:60px; z-index:40; background:rgba(251,250,247,.88); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-bottom:1px solid var(--line)}
+  .tabs{display:flex; gap:8px; padding:14px 0; overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{font-size:14px; font-weight:600; white-space:nowrap; cursor:pointer; color:var(--muted); border:1px solid var(--line); background:var(--card); padding:9px 16px; border-radius:999px; transition:.16s; display:flex; align-items:center; gap:8px; -webkit-tap-highlight-color:transparent}
+  .tab .count{font-size:11.5px; color:var(--faint); font-weight:600}
+  @media(hover:hover){.tab:hover{border-color:var(--line2); color:var(--ink)}}
+  .tab.active{background:var(--ink); color:#fff; border-color:var(--ink)}
+  .tab.active .count{color:#fff; opacity:.55}
+
+  /* ---------- grid ---------- */
+  .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; padding:42px 0 30px; align-items:start}
+  @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:600px){.grid{grid-template-columns:1fr; gap:16px; padding:30px 0}}
+
+  .card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; cursor:pointer; display:flex; flex-direction:column; transition:transform .22s, box-shadow .22s, border-color .22s; opacity:0; transform:translateY(14px); animation:rise .5s forwards; -webkit-tap-highlight-color:transparent}
+  @keyframes rise{to{opacity:1; transform:none}}
+  @media(hover:hover){.card:not(.open):hover{transform:translateY(-4px); box-shadow:0 22px 50px -28px rgba(0,0,0,.4); border-color:var(--line2)}}
+  .card:not(.open):active{transform:translateY(-1px)}
+
+  /* thumbnail placeholder — replace whole .thumb with <img src="..." style="width:100%;aspect-ratio:16/9;object-fit:cover"> */
+  .thumb{position:relative; aspect-ratio:16/9; background:var(--band2); display:flex; align-items:center; justify-content:center; padding:22px; border-bottom:1px solid var(--line); overflow:hidden}
+  .thumb .tw{font-weight:800; font-size:clamp(17px,2.4vw,22px); letter-spacing:-.03em; text-align:center; line-height:1.05; color:var(--ink); opacity:.92}
+  .thumb .glyph{position:absolute; top:15px; left:17px; font-size:20px; opacity:.85}
+  .ribbon{position:absolute; top:18px; right:-42px; width:158px; text-align:center; transform:rotate(45deg); font-size:11px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:#fff; padding:6px 0; box-shadow:0 6px 14px rgba(0,0,0,.16); z-index:2}
+  .ribbon.free{background:#4e8d6e}
+  .ribbon.custom{background:#1c1a17}
+
+  .cbody{padding:18px 19px 20px; display:flex; flex-direction:column; gap:10px; flex:1}
+  .bubbles{display:flex; flex-wrap:wrap; gap:6px}
+  .bubble{font-size:11px; font-weight:600; letter-spacing:.01em; color:var(--muted); background:var(--band); border-radius:999px; padding:4px 10px}
+  .bubble.cat{color:#fff}
+  .bubble.cat[data-c="leadgen"]{background:var(--leadgen)}
+  .bubble.cat[data-c="productivity"]{background:var(--productivity)}
+  .bubble.cat[data-c="content"]{background:var(--content)}
+  .bubble.cat[data-c="games"]{background:var(--games)}
+  h3.name{font-weight:700; font-size:20px; letter-spacing:-.02em; line-height:1.1}
+  .tag{color:var(--muted); font-size:14.5px; line-height:1.45}
+  .more{margin-top:auto; padding-top:6px; font-size:13.5px; font-weight:600; color:var(--ink); display:flex; align-items:center; gap:6px}
+  .more .arw{transition:.18s}
+  @media(hover:hover){.card:hover .more .arw{transform:translateX(4px)}}
+
+  .empty{padding:70px 0; text-align:center; color:var(--faint); font-size:14px}
+
+  /* ---------- expanded (in-place full-width) ---------- */
+  .expand{display:none}
+  .card.open{grid-column:1 / -1; cursor:default; transform:none; box-shadow:0 26px 60px -34px rgba(0,0,0,.45); border-color:var(--line2)}
+  .card.open .thumb, .card.open .cbody{display:none}
+  .card.open .expand{display:block; animation:expandin .55s cubic-bezier(.16,.84,.44,1) both}
+  @keyframes expandin{from{opacity:0; transform:translateY(16px)}to{opacity:1; transform:none}}
+  .expand{position:relative; padding:clamp(26px,4vw,48px)}
+  .exhead{max-width:820px; padding-right:52px}
+  .exhead .label{margin-bottom:12px}
+  .exhead .ename{font-weight:800; font-size:clamp(28px,4.6vw,46px); letter-spacing:-.03em; line-height:1.04; margin-bottom:12px}
+  .exhead .etag{font-size:clamp(16px,2.1vw,20px); color:var(--muted); line-height:1.45}
+  .exhead .ebubbles{display:flex; flex-wrap:wrap; gap:7px; margin-top:18px}
+  .xclose{position:absolute; top:clamp(22px,3vw,34px); right:clamp(22px,3vw,34px); width:38px; height:38px; border-radius:50%; border:1px solid var(--line2); background:var(--card); cursor:pointer; font-size:20px; color:var(--muted); display:flex; align-items:center; justify-content:center; transition:.16s; z-index:3; -webkit-tap-highlight-color:transparent}
+  @media(hover:hover){.xclose:hover{background:var(--ink); color:#fff; border-color:var(--ink)}}
+
+  .dsection{display:grid; grid-template-columns:190px 1fr; gap:24px; padding:34px 0; border-top:1px solid var(--line); max-width:960px}
+  .expand .dsection:first-of-type{margin-top:30px}
+  @media(max-width:680px){.dsection{grid-template-columns:1fr; gap:8px; padding:26px 0}}
+  .dsection .stitle{font-weight:700; font-size:15px; letter-spacing:.02em; display:flex; align-items:center; gap:10px}
+  .dsection .snum{font-size:12px; font-weight:700; color:var(--faint); border:1px solid var(--line2); border-radius:50%; width:24px; height:24px; min-width:24px; display:flex; align-items:center; justify-content:center}
+  .dsection .stext{font-size:17px; color:var(--muted); line-height:1.62; max-width:620px}
+
+  .casestudy{background:var(--band); border-radius:22px; padding:clamp(24px,3.5vw,42px); margin-top:42px; max-width:960px}
+  .casestudy .label{margin-bottom:14px}
+  .casestudy h4{font-weight:800; font-size:clamp(22px,3.3vw,30px); letter-spacing:-.03em; margin-bottom:14px}
+  .casestudy p{font-size:17px; color:#4c4842; line-height:1.66}
+  .dcta{display:flex; gap:12px; flex-wrap:wrap; margin-top:36px}
+
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid var(--line); margin-top:40px; padding:52px 0 64px; background:var(--band2)}
+  .foot{display:flex; flex-wrap:wrap; gap:22px; justify-content:space-between; align-items:flex-end}
+  .foot h5{font-weight:800; font-size:clamp(24px,4vw,40px); letter-spacing:-.03em; line-height:1.06}
+  .foot .fmeta{font-size:13px; color:var(--faint); text-align:right}
+  @media(max-width:600px){.foot{align-items:flex-start} .foot .fmeta{text-align:left}}
+
+  /* ---------- modal ---------- */
+  .overlay{position:fixed; inset:0; z-index:100; background:rgba(28,26,23,.36); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px); display:none; align-items:center; justify-content:center; padding:20px}
+  .overlay.open{display:flex; animation:fade .2s}
+  @keyframes fade{from{opacity:0}to{opacity:1}}
+  .modal{width:100%; max-width:460px; max-height:92vh; overflow-y:auto; background:var(--card); border:1px solid var(--line); border-radius:24px; padding:28px; position:relative; box-shadow:0 40px 90px -40px rgba(0,0,0,.5); animation:pop .24s cubic-bezier(.2,.8,.3,1)}
+  @keyframes pop{from{transform:translateY(12px) scale(.99); opacity:0}to{transform:none; opacity:1}}
+  .modal .x{position:absolute; top:16px; right:18px; cursor:pointer; background:none; border:none; color:var(--faint); font-size:26px; line-height:1; -webkit-tap-highlight-color:transparent}
+  .modal h2{font-weight:800; font-size:24px; letter-spacing:-.025em; margin:2px 0 6px}
+  .modal .sub{color:var(--muted); font-size:14.5px; margin-bottom:20px; line-height:1.5}
+  .field{margin-bottom:13px}
+  .field label{display:block; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint); font-weight:600; margin-bottom:6px}
+  .field input,.field select,.field textarea{width:100%; background:var(--bg); border:1px solid var(--line2); border-radius:12px; padding:13px; color:var(--ink); font-family:inherit; font-size:16px; transition:.16s}
+  .field textarea{resize:vertical; min-height:62px}
+  .field input:focus,.field select:focus,.field textarea:focus{outline:none; border-color:var(--ink)}
+  .two{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+  .submit{width:100%; margin-top:8px; background:var(--btn); color:#fff; border:none; border-radius:13px; padding:15px; font-family:inherit; font-weight:700; font-size:15px; cursor:pointer; transition:transform .16s; -webkit-tap-highlight-color:transparent}
+  .submit:active{transform:scale(.99)}
+  .success{text-align:center; padding:14px 0}
+  .success .big{font-size:40px; margin-bottom:10px}
+  @media(max-width:600px){.two{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap bar-inner">
+    <div class="brand" onclick="goTop()">Max's Library <span>of Cool Builds</span></div>
+    <button class="pill" onclick="openModal('Request a custom solution')">Get in touch</button>
+  </div>
+</header>
+
+<main class="wrap" id="listing">
+  <section class="hero">
+    <div class="label">A builder's library</div>
+    <h1>I build cool stuff. <em>Then I let you use it.</em></h1>
+    <p class="desc">This is everything I've shipped: scrapers, lead-finders, a B2C offer and proposal builder, a contract signing tool, sales tools, an AI video generation tool, and a mobile game. <b>Most of it can and should be bent to fit your business. Some of it you can just grab and go.</b></p>
+    <div class="bio">
+      <span>Born in Ukraine, hardened by British weather, Canadian on paper, now building from Dubai.</span>
+      <span class="langs">EN · UA · RUS</span>
+    </div>
+  </section>
+</main>
+
+<div class="tabsrow" id="tabsrow">
+  <div class="wrap"><div class="tabs" id="tabs"></div></div>
+</div>
+
+<main class="wrap">
+  <section class="grid" id="grid"></section>
+  <div class="empty" id="empty" style="display:none">Nothing in this category yet.</div>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <h5>See something you want for<br>your business? Let's talk.</h5>
+    <div class="fmeta">
+      <button class="pill" onclick="openModal('Request a custom solution')">Get in touch</button>
+      <div style="margin-top:14px">Built by Max. Bent to fit.</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== modal ===== -->
+<div class="overlay" id="overlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <button class="x" onclick="closeModal()">&times;</button>
+    <div id="formView">
+      <h2>Get more info</h2>
+      <p class="sub">Drop your details and I'll reach out. It lands straight in my inbox, no bots, no funnel.</p>
+      <div class="two">
+        <div class="field"><label>First name</label><input id="fFirst" type="text" autocomplete="given-name" /></div>
+        <div class="field"><label>Last name</label><input id="fLast" type="text" autocomplete="family-name" /></div>
+      </div>
+      <div class="field"><label>Phone</label><input id="fPhone" type="tel" autocomplete="tel" placeholder="+971 ..." /></div>
+      <div class="field"><label>Email</label><input id="fEmail" type="email" autocomplete="email" /></div>
+      <div class="field"><label>What are you interested in</label><select id="fTool"></select></div>
+      <div class="field"><label>Anything else (optional)</label><textarea id="fMsg" placeholder="A line about your business helps."></textarea></div>
+      <button class="submit" onclick="submitForm()">Send it</button>
+    </div>
+    <div id="successView" class="success" style="display:none">
+      <div class="big">✓</div>
+      <h2>Got it.</h2>
+      <p class="sub">Thanks, I'll be in touch. If your mail app opened, just hit send.</p>
+      <button class="submit" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   CONFIG — set these two and you're live.
+   ============================================================ */
+const CONFIG = {
+  email: "max64800@gmail.com",   // <-- where leads land. Change to whichever inbox you want.
+  formEndpoint: ""               // <-- OPTIONAL: paste a Formspree URL or your own /api route for silent
+                                 //     server-side capture. Leave "" to use the mail-app fallback.
+};
+
+const CATS = [
+  {id:"all",          label:"All"},
+  {id:"leadgen",      label:"Lead Generation"},
+  {id:"productivity", label:"Productivity"},
+  {id:"content",      label:"Content"},
+  {id:"games",        label:"Games"}
+];
+
+/* categories: leadgen | productivity | content | games
+   Add a `link` to any tool to show an external "Open it" button when expanded.
+   p = Problem, s = Solution, t = Target audience, story = case study */
+const TOOLS = [
+  {
+    name:"Google Maps Scraper", cat:"leadgen", glyph:"📍",
+    status:"Live", statusClass:"live",
+    bubbles:["data","spreadsheet"],
+    tag:"Any city plus any niche, turned into a clean lead list in minutes.",
+    p:"You know the kind of business you want to sell to and the city they're in. Turning that into something you can actually call means hours of clicking through Google Maps, copying numbers, hunting for emails, and tabbing between a dozen websites.",
+    s:"Point it at a search and an area. It pulls every business it can find and hands you a clean spreadsheet with phone numbers, emails, business social media links, reviews, ratings, websites, and everything else sitting on the Google Maps profile.",
+    t:"Sales teams, agencies, and anyone building local B2B lead lists.",
+    story:"A website design agency wanted every plumber with no website across five US cities. By hand that's a rainy weekend gone. We ran it over a coffee and walked away with more than 200 businesses, phone numbers included, ready to call and pitch a website to. Their reps were dialing that same afternoon instead of dreading a list nobody wanted to build."
+  },
+  {
+    name:"Yandex Maps Scraper", cat:"leadgen", glyph:"🧭",
+    status:"Live", statusClass:"live",
+    bubbles:["data","spreadsheet","eastern europe"],
+    tag:"Any city plus any niche, turned into a clean lead list in minutes. Eastern Europe focused.",
+    p:"If your buyers are in Eastern Europe, Russia, or the wider CIS, half of them simply don't show up properly on Google. Yandex is where those businesses actually live, and copying them out by hand is slow, manual work.",
+    s:"Give it a category and a region. It returns a clean spreadsheet of businesses with phone numbers, emails, business social media links, reviews, ratings, and everything else on the Yandex profile.",
+    t:"Anyone selling into Eastern Europe, Russian-speaking, and CIS markets.",
+    story:"A Dubai consulting agency needed accountancy firms across Kazakhstan and southern Russia. Those companies barely register on Google. One Yandex pass later they had a few hundred verified businesses with direct numbers, emails, websites, and socials, finally enough leads to actually work."
+  },
+  {
+    name:"Offer Builder", cat:"productivity", glyph:"📄",
+    status:"Live", statusClass:"live",
+    bubbles:["sales","e-signature","customizable per business"],
+    tag:"Build a branded, signable offer in minutes. Process, timelines, benefits, fees, taxes, and all.",
+    p:"Every quote gets rebuilt from scratch. You copy line items, guess at the fees, wrestle the formatting, export a PDF, email it, and then spend two weeks chasing a signature.",
+    s:"A library of your services that you snap together into a branded offer. For every single offer you control the process steps, the timelines, the subitems, the benefits, the government fees and taxes, your profit, and any referral fees. Send it, the client e-signs it, and it chases the signature with automatic email reminders while tracking the expiry for you.",
+    t:"Agencies, consultancies, and service businesses that send custom proposals.",
+    story:"A Dubai consulting agency had more than 200 offers, each with its own process, timelines, government costs, referral fees, and taxes. Building one was taking 20 to 40 minutes even with Google templates. Now they put an offer together in under a minute, it looks far more presentable, it chases the client's signature automatically, and it's ready to send right there during the consultation instead of an hour after the client has cooled off."
+  },
+  {
+    name:"Knowledge Chat", cat:"productivity", glyph:"💬",
+    status:"Live", statusClass:"live",
+    bubbles:["AI","support","customizable per business"],
+    tag:"Ask once, get a verified, client-ready answer to copy and paste. Built from your knowledge, checked against official sources.",
+    p:"Clients ask the same questions all day, and the real answers are scattered across your website, your Notion, years of Telegram chats, and somebody's head. Worse, the right answer often depends on current government rules.",
+    s:"Ask it a question. It checks everything you know across your website, Notion, Telegram history, or wherever you store your data, decides which source to trust, verifies the details against official government websites, and then writes a reply you can copy and paste straight to the client. It works across your whole team too, so everyone can see what others have asked, and the most popular questions get pinned automatically.",
+    t:"Any business answering repetitive client questions, especially where the rules keep changing.",
+    story:"A team was burning half its day on 'can I get a visa if...' questions, each one needing a dig through old chats plus a government site to be sure. Now they type the question, get a verified, client-ready answer in seconds, and paste it. New hires started sounding like ten-year veterans on day one."
+  },
+  {
+    name:"Signalcast", cat:"leadgen", glyph:"📡",
+    status:"Live · For sale", statusClass:"sale",
+    bubbles:["AI","telegram","customizable per business"],
+    tag:"Reads 10,000+ Telegram messages a day to catch buyers asking for your products and services.",
+    p:"Your next client is in a Telegram group right now asking 'does anyone know someone who does X.' By the time you scroll past it, three competitors have already replied.",
+    s:"It reads 10,000+ messages a day across the groups your buyers hang out in and uses AI to catch the people asking for a referral or a service you offer. The moment one lands, it pings you so you can swoop in and pitch your service straight to the lead.",
+    t:"Any business whose customers live on Telegram and ask their communities for referrals, recommendations, or help.",
+    story:"An immigration lawyer couldn't make Facebook and Google ads pay off. The leads were cold, slow, and expensive. Now he gets 3 to 5 hot leads a day, real people in the community actively asking for exactly the service he provides, and all he has to do is reach out first."
+  },
+  {
+    name:"Reddit Monitor", cat:"leadgen", glyph:"👽",
+    status:"Live", statusClass:"live",
+    bubbles:["AI","reddit","customizable per business"],
+    tag:"Reads 10,000+ Reddit threads a day to catch buyers asking for your products and services.",
+    p:"People describe their problems in detail on Reddit and openly ask for recommendations. The threads move fast, and you will never read them all in time.",
+    s:"It reads 10,000+ threads a day across the subreddits your buyers post in, scores how urgent each one is, and alerts you the moment someone describes a problem you solve, so you can reply while the thread is still warm.",
+    t:"SaaS, agencies, and anyone whose customers ask for help on Reddit.",
+    story:"A telematics company was shifting from just selling hardware to building custom add-ons for any telematics provider. The best way to find buyers turned out to be Reddit, where people vent about the one feature their current system is missing. Now those complaints land in front of them the same day, and each one is a warm lead describing the exact thing they build."
+  },
+  {
+    name:"LinkedIn Comment Finder", cat:"leadgen", glyph:"✍️",
+    status:"Live", statusClass:"live",
+    bubbles:["AI","linkedin","customizable per person"],
+    tag:"Automatically finds posts and drafts comments that start conversations with your ideal customers.",
+    p:"Everyone says be active on LinkedIn, but staring at the feed trying to write a clever comment ten times a day is a grind, and most comments lead nowhere.",
+    s:"It finds the right posts where your prospects are active and writes a comment built to start a conversation. From there you connect, follow up with a personalized message, and close the lead.",
+    t:"Founders and sales reps doing social selling.",
+    story:"A founder wanted a real pipeline from LinkedIn without turning into a comment robot. The tool surfaced posts from exactly the people he wanted to meet and handed him openers that actually started chats. A handful of those threads turned into DMs, and a couple of those DMs turned into clients."
+  },
+  {
+    name:"LinkedIn Profile Reviewer", cat:"leadgen", glyph:"🔎",
+    status:"Live", statusClass:"live",
+    bubbles:["AI","linkedin","customizable per business"],
+    tag:"Reads a profile, analyzes if it is a client, referral partner, or a time waste, and writes the personalized opener.",
+    p:"Personalized outreach is what works, and reading every profile then writing a custom opener for each one is the slowest part of the whole job.",
+    s:"It reviews a prospect's profile, sorts them into the right bucket of client, referral partner, or skip, and drafts a personalized opener tailored to exactly who they are.",
+    t:"SDRs and founders running outbound.",
+    story:"A founder was spending more time researching prospects than talking to them. Now he opens a profile, gets an instant read on whether they're worth his time, and a first message that sounds like he actually looked. He doubled the number of real conversations without adding two hours of reading LinkedIn profiles to his day."
+  },
+  {
+    name:"Skald", cat:"content", glyph:"🎬",
+    status:"Live", statusClass:"live",
+    bubbles:["AI video","short-form","customizable per brand"],
+    tag:"One idea in, a finished short-form video out.",
+    p:"Short-form video is the cheapest attention on the internet, but actually making it every day means scripting, recording, editing, and captioning. That's a full-time job most people don't have.",
+    s:"Skald turns a single idea into a finished short-form video. It writes the script, builds the scenes, syncs the captions, and renders a clean vertical video that's ready to post, all in your style.",
+    t:"Founders, creators, and brands that want to post consistently without a production team.",
+    story:"Someone wanted to post a video a day but kept skipping it because editing ate the whole evening. With Skald they go from a one-line idea to a finished, captioned vertical video in minutes. The posting streak survived. So did their evenings."
+  },
+  {
+    name:"Arcane Sorter", cat:"games", glyph:"🧪",
+    status:"Coming soon · Free", statusClass:"soon",
+    bubbles:["mobile game","free"],
+    tag:"A fun mobile game that satisfies the sort-the-trays puzzle urge.",
+    p:"You're bored, you're in a queue, and you've got five minutes and a phone.",
+    s:"A clean little sorting puzzle. Slide potions, gems, runes, mushrooms, and scrolls into matching trays to clear the board. Dead simple to start, sneaky-hard to master.",
+    t:"Anyone with a phone and a few minutes to kill.",
+    story:"This one started as a dare to myself to see if I could build a proper mobile game from scratch. It turned into the thing my own family steals my phone to play. No leads, no funnel, just a genuinely satisfying way to waste a little time. Coming to the App Store, free."
+    /* , link:"https://apps.apple.com/..." */
+  }
+];
+
+/* ============================================================ */
+const FREE_TOOLS = new Set(["Google Maps Scraper","Yandex Maps Scraper","Arcane Sorter"]);
+const IMG_MAP = {
+  "Google Maps Scraper":"Google_Maps_Scraper.png",
+  "Yandex Maps Scraper":"Yandex_Maps_Scraper.png",
+  "Offer Builder":"Offer_builder.png",
+  "Knowledge Chat":"Knowledge_base.png",
+  "Signalcast":"Signal_cast.png",
+  "Reddit Monitor":"Reddit_monitor.png",
+  "LinkedIn Comment Finder":"LinkedIn_Comments.png",
+  "LinkedIn Profile Reviewer":"Linkedin_Profile_Messages.png",
+  "Skald":"Skald.png",
+  "Arcane Sorter":"Arcane_Clear.png"
+};
+let activeCat = "all";
+const grid = document.getElementById("grid");
+const tabsEl = document.getElementById("tabs");
+const emptyEl = document.getElementById("empty");
+
+function countFor(id){ return id==="all"?TOOLS.length:TOOLS.filter(t=>t.cat===id).length; }
+function catLabel(id){ return (CATS.find(c=>c.id===id)||{}).label||id; }
+function esc(s){ return (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+function catBubble(cat){ return `<span class="bubble cat" data-c="${cat}">${esc(catLabel(cat))}</span>`; }
+function bubbleRow(t){ return catBubble(t.cat)+t.bubbles.map(b=>`<span class="bubble">${esc(b)}</span>`).join(""); }
+
+function renderTabs(){
+  tabsEl.innerHTML = CATS.map(c=>`<button class="tab ${c.id===activeCat?'active':''}" onclick="setCat('${c.id}')">${c.label} <span class="count">${countFor(c.id)}</span></button>`).join("");
+}
+function setCat(id){ activeCat=id; renderTabs(); renderGrid(); }
+
+function renderGrid(){
+  const list = activeCat==="all"?TOOLS:TOOLS.filter(t=>t.cat===activeCat);
+  emptyEl.style.display = list.length?"none":"block";
+  grid.innerHTML = list.map((t,i)=>{
+    const idx = TOOLS.indexOf(t);
+    const ribbon = FREE_TOOLS.has(t.name)?"free":"custom";
+    const linkBtn = t.link?`<a class="pill ghost" href="${t.link}" target="_blank" rel="noopener" onclick="event.stopPropagation()">Open it</a>`:"";
+    return `
+    <article class="card" data-idx="${idx}" style="animation-delay:${i*45}ms" onclick="if(!this.classList.contains('open')) openCard(${idx})">
+      <div class="thumb"${IMG_MAP[t.name]?' style="padding:0"':''}>
+        ${IMG_MAP[t.name]?`<img src="${IMG_MAP[t.name]}" alt="${esc(t.name)}" style="width:100%;height:100%;object-fit:cover;display:block" />`:`<span class="glyph">${t.glyph}</span><span class="tw">${esc(t.name)}</span>`}
+        <span class="ribbon ${ribbon}">${ribbon}</span>
+      </div>
+      <div class="cbody">
+        <div class="bubbles">${bubbleRow(t)}</div>
+        <h3 class="name">${esc(t.name)}</h3>
+        <div class="tag">${esc(t.tag)}</div>
+        <div class="more">Read more <span class="arw">→</span></div>
+      </div>
+      <div class="expand">
+        <div class="exhead">
+          <button class="xclose" onclick="closeCard(event)" aria-label="Close">&times;</button>
+          <div class="label">${esc(catLabel(t.cat))}</div>
+          <div class="ename">${esc(t.name)}</div>
+          <div class="etag">${esc(t.tag)}</div>
+          <div class="ebubbles">${bubbleRow(t)}</div>
+        </div>
+        <div class="dsection"><div class="stitle"><span class="snum">1</span> Problem</div><div class="stext">${esc(t.p)}</div></div>
+        <div class="dsection"><div class="stitle"><span class="snum">2</span> Solution</div><div class="stext">${esc(t.s)}</div></div>
+        <div class="dsection"><div class="stitle"><span class="snum">3</span> Target audience</div><div class="stext">${esc(t.t)}</div></div>
+        <div class="casestudy">
+          <div class="label">How it played out</div>
+          <h4>A quick story</h4>
+          <p>${esc(t.story)}</p>
+        </div>
+        <div class="dcta">
+          <button class="pill" onclick="event.stopPropagation(); openModal('${esc(t.name).replace(/'/g,"\\'")}')">Get more info</button>
+          ${linkBtn}
+        </div>
+      </div>
+    </article>`;
+  }).join("");
+}
+
+function openCard(idx){
+  document.querySelectorAll('.card.open').forEach(c=>c.classList.remove('open'));
+  const card = document.querySelector(`.card[data-idx="${idx}"]`);
+  if(!card) return;
+  card.classList.add('open');
+  // scroll the expanded block just below the sticky header + tabs
+  requestAnimationFrame(()=>{
+    const y = card.getBoundingClientRect().top + window.scrollY - 118;
+    window.scrollTo({top:Math.max(0,y), behavior:'smooth'});
+  });
+}
+function closeCard(e){
+  if(e) e.stopPropagation();
+  document.querySelectorAll('.card.open').forEach(c=>c.classList.remove('open'));
+}
+function goTop(){ closeCard(); window.scrollTo({top:0, behavior:'smooth'}); }
+
+/* ---------- modal ---------- */
+const overlay = document.getElementById("overlay");
+const sel = document.getElementById("fTool");
+function buildSelect(preset){
+  const opts = ['<option value="Request a custom solution">Request a custom solution</option>']
+    .concat(TOOLS.map(t=>`<option value="${esc(t.name)}">${esc(t.name)}</option>`))
+    .concat('<option value="Just saying hi">Just saying hi</option>');
+  sel.innerHTML = opts.join("");
+  sel.value = (preset && [...sel.options].some(o=>o.value===preset)) ? preset : "Request a custom solution";
+}
+function openModal(preset){
+  document.getElementById("formView").style.display="block";
+  document.getElementById("successView").style.display="none";
+  buildSelect(preset);
+  overlay.classList.add("open"); document.body.style.overflow="hidden";
+  if(window.innerWidth>600) setTimeout(()=>document.getElementById("fFirst").focus(),60);
+}
+function closeModal(){ overlay.classList.remove("open"); document.body.style.overflow=""; }
+document.addEventListener("keydown",e=>{ if(e.key==="Escape"){ closeModal(); closeCard(); }});
+
+function submitForm(){
+  const d = {
+    firstName:document.getElementById("fFirst").value.trim(),
+    lastName: document.getElementById("fLast").value.trim(),
+    phone:    document.getElementById("fPhone").value.trim(),
+    email:    document.getElementById("fEmail").value.trim(),
+    interest: sel.value,
+    message:  document.getElementById("fMsg").value.trim()
+  };
+  if(!d.firstName || !d.email){ alert("First name and email, please."); return; }
+  if(CONFIG.formEndpoint){
+    fetch(CONFIG.formEndpoint,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(d)}).then(showSuccess).catch(showSuccess);
+  } else {
+    const subject = `Library lead: ${d.interest}`;
+    const body = `Name:  ${d.firstName} ${d.lastName}\nPhone: ${d.phone}\nEmail: ${d.email}\nInterested in: ${d.interest}\n\n${d.message}`;
+    window.location.href = `mailto:${CONFIG.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    showSuccess();
+  }
+}
+function showSuccess(){ document.getElementById("formView").style.display="none"; document.getElementById("successView").style.display="block"; }
+
+renderTabs(); renderGrid();
+</script>
+</body>
+</html>
