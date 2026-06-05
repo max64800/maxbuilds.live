@@ -25,7 +25,7 @@
     --ink:#1c1a17; --muted:#6f6b63; --faint:#a6a199;
     --line:rgba(0,0,0,.09); --line2:rgba(0,0,0,.14);
     --btn:#1c1a17;
-    --leadgen:#bf6a35; --productivity:#4e8d6e; --content:#a9842f; --games:#bd5772;
+    --leadgen:#bf6a35; --productivity:#4e8d6e; --content:#a9842f; --games:#bd5772; --operations:#5b8fbd;
     --maxw:1140px; --radius:20px;
   }
   *{box-sizing:border-box; margin:0; padding:0}
@@ -86,7 +86,7 @@
   .thumb{position:relative; aspect-ratio:16/9; background:var(--band2); display:flex; align-items:center; justify-content:center; padding:22px; border-bottom:1px solid var(--line); overflow:hidden}
   .thumb .tw{font-weight:800; font-size:clamp(17px,2.4vw,22px); letter-spacing:-.03em; text-align:center; line-height:1.05; color:var(--ink); opacity:.92}
   .thumb .glyph{position:absolute; top:15px; left:17px; font-size:20px; opacity:.85}
-  .ribbon{position:absolute; top:18px; right:-42px; width:158px; text-align:center; transform:rotate(45deg); font-size:11px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:#fff; padding:6px 0; box-shadow:0 6px 14px rgba(0,0,0,.16); z-index:2}
+  .ribbon{position:absolute; top:18px; left:-42px; width:158px; text-align:center; transform:rotate(-45deg); font-size:11px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:#fff; padding:6px 0; box-shadow:0 6px 14px rgba(0,0,0,.16); z-index:2}
   .ribbon.free{background:#4e8d6e}
   .ribbon.custom{background:#1c1a17}
 
@@ -98,6 +98,7 @@
   .bubble.cat[data-c="productivity"]{background:var(--productivity)}
   .bubble.cat[data-c="content"]{background:var(--content)}
   .bubble.cat[data-c="games"]{background:var(--games)}
+  .bubble.cat[data-c="operations"]{background:var(--operations)}
   h3.name{font-weight:700; font-size:20px; letter-spacing:-.02em; line-height:1.1}
   .tag{color:var(--muted); font-size:14.5px; line-height:1.45}
   .more{margin-top:auto; padding-top:6px; font-size:13.5px; font-weight:600; color:var(--ink); display:flex; align-items:center; gap:6px}
@@ -244,6 +245,7 @@ const CATS = [
   {id:"leadgen",      label:"Lead Generation"},
   {id:"productivity", label:"Productivity"},
   {id:"content",      label:"Content"},
+  {id:"operations",   label:"Operations"},
   {id:"games",        label:"Games"}
 ];
 
@@ -340,6 +342,16 @@ const TOOLS = [
     s:"Skald turns a single idea into a finished short-form video. It writes the script, builds the scenes, syncs the captions, and renders a clean vertical video that's ready to post, all in your style.",
     t:"Founders, creators, and brands that want to post consistently without a production team.",
     story:"Someone wanted to post a video a day but kept skipping it because editing ate the whole evening. With Skald they go from a one-line idea to a finished, captioned vertical video in minutes. The posting streak survived. So did their evenings."
+  },
+  {
+    name:"Property Radar", cat:"operations", glyph:"🏠",
+    status:"Live", statusClass:"live",
+    bubbles:["real estate","notifications","customizable per brokerage"],
+    tag:"Your team's private feed of every listing that moves in your market.",
+    p:"Real estate teams waste the first hour of every morning scrolling through listing portals, trying to spot new properties, price drops, and status changes. By the time you notice a villa just listed or a price cut, a competitor already called the seller.",
+    s:"An internal team platform that monitors your target area around the clock, tracks every listing, flags new properties and price changes, enriches each one with photos and details, removes duplicates, and pushes a daily intelligence brief straight to your team's group chat. Your team wakes up knowing exactly what moved overnight without anyone spending an hour refreshing portals.",
+    t:"Real estate brokerages and teams that need to know their market cold.",
+    story:"A luxury villa team was spending the first hour of every morning manually scrolling through listings to see what was new. Now they get a clean daily brief in their group chat before coffee. New listings, price drops, status changes, all flagged and organized automatically. The agents who used to waste time tracking inventory now spend that hour calling sellers instead."
   },
   {
     name:"Arcane Sorter", cat:"games", glyph:"🧪",
