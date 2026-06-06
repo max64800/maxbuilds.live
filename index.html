@@ -143,6 +143,12 @@
   .casestudy .label{margin-bottom:14px}
   .casestudy h4{font-weight:800; font-size:clamp(22px,3.3vw,30px); letter-spacing:-.03em; margin-bottom:14px}
   .casestudy p{font-size:17px; color:#4c4842; line-height:1.66}
+  .installguide{background:var(--card); border:1px solid var(--line); border-radius:22px; padding:clamp(24px,3.5vw,42px); margin-top:28px; max-width:960px}
+  .installguide .label{margin-bottom:14px}
+  .installguide h4{font-weight:800; font-size:clamp(22px,3.3vw,30px); letter-spacing:-.03em; margin-bottom:18px}
+  .steps{display:flex; flex-direction:column; gap:12px}
+  .step{display:flex; align-items:flex-start; gap:14px; font-size:15.5px; color:var(--muted); line-height:1.5}
+  .stepnum{min-width:28px; height:28px; border-radius:50%; background:var(--band); font-size:13px; font-weight:700; color:var(--ink); display:flex; align-items:center; justify-content:center}
   .dcta{display:flex; gap:12px; flex-wrap:wrap; margin-top:36px}
 
   /* ---------- footer ---------- */
@@ -271,7 +277,8 @@ const TOOLS = [
     p:"You know the kind of business you want to sell to and the city they're in. Turning that into something you can actually call means hours of clicking through Google Maps, copying numbers, hunting for emails, and tabbing between a dozen websites.",
     s:"Point it at a search and an area. It pulls every business it can find and hands you a clean spreadsheet with phone numbers, emails, business social media links, reviews, ratings, websites, and everything else sitting on the Google Maps profile.",
     t:"Sales teams, agencies, and anyone building local B2B lead lists.",
-    story:"A website design agency wanted every plumber with no website across five US cities. By hand that's a rainy weekend gone. We ran it over a coffee and walked away with more than 200 businesses, phone numbers included, ready to call and pitch a website to. Their reps were dialing that same afternoon instead of dreading a list nobody wanted to build."
+    story:"A website design agency wanted every plumber with no website across five US cities. By hand that's a rainy weekend gone. We ran it over a coffee and walked away with more than 200 businesses, phone numbers included, ready to call and pitch a website to. Their reps were dialing that same afternoon instead of dreading a list nobody wanted to build.",
+    driveLink:"https://drive.google.com/drive/folders/1ZgO95ZhsUx-vrlS-UgU-QsBZSXaNvwG8"
   },
   {
     name:"Yandex Maps Scraper", cat:"leadgen", glyph:"🧭",
@@ -281,7 +288,8 @@ const TOOLS = [
     p:"If your buyers are in Eastern Europe, Russia, or the wider CIS, half of them simply don't show up properly on Google. Yandex is where those businesses actually live, and copying them out by hand is slow, manual work.",
     s:"Give it a category and a region. It returns a clean spreadsheet of businesses with phone numbers, emails, business social media links, reviews, ratings, and everything else on the Yandex profile.",
     t:"Anyone selling into Eastern Europe, Russian-speaking, and CIS markets.",
-    story:"A Dubai consulting agency needed accountancy firms across Kazakhstan and southern Russia. Those companies barely register on Google. One Yandex pass later they had a few hundred verified businesses with direct numbers, emails, websites, and socials, finally enough leads to actually work."
+    story:"A Dubai consulting agency needed accountancy firms across Kazakhstan and southern Russia. Those companies barely register on Google. One Yandex pass later they had a few hundred verified businesses with direct numbers, emails, websites, and socials, finally enough leads to actually work.",
+    driveLink:"https://drive.google.com/drive/folders/1OX5qE5zldLNZwRTNyFxX1eyhIsLIuRBP"
   },
   {
     name:"Offer Builder", cat:"productivity", glyph:"📄",
@@ -354,6 +362,38 @@ const TOOLS = [
     story:"Someone wanted to post a video a day but kept skipping it because editing ate the whole evening. With Skald they go from a one-line idea to a finished, captioned vertical video in minutes. The posting streak survived. So did their evenings."
   },
   {
+    name:"Twitch Email Scraper", cat:"leadgen", glyph:"🎮",
+    status:"Live", statusClass:"live",
+    bubbles:["data","spreadsheet"],
+    tag:"Find sponsorable streamers' emails and LinkedIn in any Twitch category.",
+    p:"Brands and agencies want to sponsor streamers but finding their contact info means clicking through hundreds of profiles, checking bios, and hunting for email addresses one by one.",
+    s:"Point it at any Twitch category page. It scrapes through the streamers, finds their email addresses and LinkedIn profiles, and exports everything to a clean CSV ready for outreach.",
+    t:"Brands, agencies, and anyone running influencer or sponsorship campaigns on Twitch.",
+    story:"A gaming peripherals brand wanted to reach mid-tier streamers in three categories. Manually finding emails was taking their intern a full week. The scraper pulled contact info for hundreds of streamers in an afternoon, and the outreach campaign launched the next morning.",
+    driveLink:"https://drive.google.com/drive/folders/1jnDc-thKWEloxnnx4hqrwoqUeyBaEKVV"
+  },
+  {
+    name:"Decision Maker Finder", cat:"leadgen", glyph:"👤",
+    status:"Live", statusClass:"live",
+    bubbles:["data","spreadsheet"],
+    tag:"Give it a list of companies, get back the names and titles of who runs them.",
+    p:"You have a list of target companies but no idea who to call. Digging through each website's about page and team section to find the founder or decision maker is tedious and slow.",
+    s:"Upload a CSV of company websites. It crawls each one, finds the decision makers listed on the site (names, titles, roles), and hands you back a clean list of exactly who to reach out to.",
+    t:"Sales teams and agencies with a target list that needs names attached to it.",
+    story:"A B2B agency had 500 companies on a cold outreach list but only website URLs. Finding the right person at each one was taking their team days of manual research. The finder crawled all 500 sites overnight and came back with founder names and titles for the majority, ready to plug straight into their outreach.",
+    driveLink:"https://drive.google.com/drive/folders/1BEvb97g7oLDfRRZmNIhSdnWCXaiyJto3"
+  },
+  {
+    name:"Agent Ranker", cat:"operations", glyph:"🏆",
+    status:"Live", statusClass:"live",
+    bubbles:["real estate","data","customizable per brokerage"],
+    tag:"Find the top 10-20% of agents who actually close deals.",
+    p:"Real estate companies looking for agent partnerships waste time reaching out to hundreds of agents when only a small fraction are actually active and closing. Most agents listed on portals are inactive or low-volume.",
+    s:"It filters and ranks agents by their actual listing activity, transaction volume, and market presence, surfacing only the top 10-20% who are genuinely productive. You reach out to closers, not seat-warmers.",
+    t:"Real estate brokerages, developers, and service providers looking for high-performing agent partnerships.",
+    story:"A property developer needed to build a network of productive agents to sell a new project. Instead of cold-calling 400 agents from a portal, they ran the ranker and narrowed it to the 60 who were actually listing and closing regularly. Every partnership call went to someone worth talking to."
+  },
+  {
     name:"Property Radar", cat:"operations", glyph:"🏠",
     status:"Live", statusClass:"live",
     bubbles:["real estate","notifications","customizable per brokerage"],
@@ -377,7 +417,7 @@ const TOOLS = [
 ];
 
 /* ============================================================ */
-const FREE_TOOLS = new Set(["Google Maps Scraper","Yandex Maps Scraper","Arcane Sorter"]);
+const FREE_TOOLS = new Set(["Google Maps Scraper","Yandex Maps Scraper","Arcane Sorter","Twitch Email Scraper","Decision Maker Finder"]);
 const IMG_MAP = {
   "Google Maps Scraper":"Google%20Maps%20Scraper.png",
   "Yandex Maps Scraper":"Yandex%20Maps%20Scraper.png",
@@ -389,7 +429,10 @@ const IMG_MAP = {
   "LinkedIn Profile Reviewer":"Linkedin%20Profile%20Messages.png",
   "Skald":"Skald.png",
   "Arcane Sorter":"Arcane%20Clear.png",
-  "Property Radar":"Property%20Radar.png"
+  "Property Radar":"Property%20Radar.png",
+  "Twitch Email Scraper":"Twitch%20Email%20Scraper.png",
+  "Decision Maker Finder":"Decision%20Maker%20Finder.png",
+  "Agent Ranker":"Agent%20Ranker.png"
 };
 let activeCat = "all";
 const grid = document.getElementById("grid");
@@ -442,6 +485,21 @@ function renderGrid(){
           <h4>A quick story</h4>
           <p>${esc(t.story)}</p>
         </div>
+        ${t.driveLink?`
+        <div class="installguide">
+          <div class="label">How to install</div>
+          <h4>Chrome Extension Setup</h4>
+          <div class="steps">
+            <div class="step"><span class="stepnum">1</span> Click the download button below to open the Google Drive folder</div>
+            <div class="step"><span class="stepnum">2</span> Download the folder as a ZIP (click the download icon in Drive)</div>
+            <div class="step"><span class="stepnum">3</span> Unzip the folder on your computer</div>
+            <div class="step"><span class="stepnum">4</span> Open Chrome and go to <b>chrome://extensions</b></div>
+            <div class="step"><span class="stepnum">5</span> Turn on <b>Developer mode</b> (toggle in the top right corner)</div>
+            <div class="step"><span class="stepnum">6</span> Click <b>Load unpacked</b> and select the unzipped folder</div>
+            <div class="step"><span class="stepnum">7</span> The extension icon appears in your toolbar, ready to use</div>
+          </div>
+          <a class="pill" href="${t.driveLink}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="display:inline-flex;margin-top:18px">Download Extension</a>
+        </div>`:""}
         <div class="dcta">
           <button class="pill" onclick="event.stopPropagation(); openModal('${esc(t.name).replace(/'/g,"\\'")}')">Get more info</button>
           ${linkBtn}
