@@ -94,9 +94,11 @@
   .ribbon.soon{background:#a9842f; width:190px; left:-46px; top:20px; font-size:10px}
 
   /* closing animation */
-  .card.closing .expand > *{animation:expandout .5s cubic-bezier(.4,.2,.6,1) both}
-  .card.closing .thumb{animation:expandout .4s ease .1s both}
-  @keyframes expandout{from{opacity:1; transform:none}to{opacity:0; transform:translateY(16px)}}
+  .card.closing .expand{display:block}
+  .card.closing .cbody{display:none}
+  .card.closing .expand > *{animation:expandout .7s cubic-bezier(.4,.2,.6,1) both !important; animation-delay:0s !important}
+  .card.closing .thumb{animation:expandout .6s ease both !important}
+  @keyframes expandout{from{opacity:1; transform:none}to{opacity:0; transform:translateY(20px)}}
 
   .cbody{padding:18px 19px 20px; display:flex; flex-direction:column; gap:10px; flex:1}
   .bubbles{display:flex; flex-wrap:wrap; gap:6px}
@@ -121,17 +123,17 @@
   .card.open .cbody{display:none}
   .card.open .thumb{aspect-ratio:auto; max-height:none; border-bottom:1px solid var(--line)}
   .card.open .expand{display:block}
-  .card.open .expand > *{opacity:0; animation:expandin 1.5s cubic-bezier(.22,.68,.35,1) both}
-  .card.open .expand > *:nth-child(1){animation-delay:.15s}
-  .card.open .expand > *:nth-child(2){animation-delay:.4s}
-  .card.open .expand > *:nth-child(3){animation-delay:.65s}
-  .card.open .expand > *:nth-child(4){animation-delay:.9s}
-  .card.open .expand > *:nth-child(5){animation-delay:1.15s}
-  .card.open .expand > *:nth-child(6){animation-delay:1.4s}
-  .card.open .expand > *:nth-child(7){animation-delay:1.6s}
-  @keyframes expandin{from{opacity:0; transform:translateY(32px)}to{opacity:1; transform:none}}
+  .card.open .expand > *{opacity:0; animation:expandin 2s cubic-bezier(.16,.7,.3,1) both}
+  .card.open .expand > *:nth-child(1){animation-delay:.2s}
+  .card.open .expand > *:nth-child(2){animation-delay:.55s}
+  .card.open .expand > *:nth-child(3){animation-delay:.9s}
+  .card.open .expand > *:nth-child(4){animation-delay:1.25s}
+  .card.open .expand > *:nth-child(5){animation-delay:1.6s}
+  .card.open .expand > *:nth-child(6){animation-delay:1.9s}
+  .card.open .expand > *:nth-child(7){animation-delay:2.1s}
+  @keyframes expandin{from{opacity:0; transform:translateY(40px)}to{opacity:1; transform:none}}
   .expand{position:relative; padding:clamp(26px,4vw,48px)}
-  .exhead{max-width:820px; padding-right:52px}
+  .exhead{max-width:820px; padding-right:52px; padding-bottom:40px}
   .exhead .label{margin-bottom:12px}
   .exhead .ename{font-weight:800; font-size:clamp(28px,4.6vw,46px); letter-spacing:-.03em; line-height:1.04; margin-bottom:12px}
   .exhead .etag{font-size:clamp(16px,2.1vw,20px); color:var(--muted); line-height:1.45}
@@ -140,7 +142,6 @@
   @media(hover:hover){.xclose:hover{background:var(--ink); color:#fff; border-color:var(--ink)}}
 
   .dsection{display:grid; grid-template-columns:190px 1fr; gap:24px; padding:34px 0; border-top:1px solid var(--line); max-width:960px}
-  .expand .dsection:first-of-type{margin-top:44px}
   @media(max-width:680px){.dsection{grid-template-columns:1fr; gap:8px; padding:26px 0}}
   .dsection .stitle{font-weight:700; font-size:15px; letter-spacing:.02em; display:flex; align-items:center; gap:10px}
   .dsection .snum{font-size:12px; font-weight:700; color:var(--faint); border:1px solid var(--line2); border-radius:50%; width:24px; height:24px; min-width:24px; display:flex; align-items:center; justify-content:center}
@@ -398,7 +399,7 @@ const TOOLS = [
     p:"Companies looking for agent partnerships waste time reaching out to thousands of agents when only a small fraction are actually active and closing. Most agents listed on portals are inactive or low-volume.",
     s:"It filters and ranks agents by their actual listing activity, transaction volume, and market presence, surfacing only the top 10% who are genuinely productive. You reach out to closers, not seat-warmers.",
     t:"Any company that works with real estate agents and needs to find the ones who actually perform.",
-    story:"A company was getting great referrals from real estate brokers and wanted to scale. But their target list had 28,000 agents, way too many to call. We built a solution that filtered it down to 3,000 of only the top performers who genuinely generate referrals. Every call went to someone worth talking to."
+    story:"A company was getting great referrals from real estate brokers and wanted to scale. We found every agent in their city, all 28,000 of them. Calling that many was impossible. We built a solution that filtered it down to 3,000 of only the top performers who genuinely generate referrals. Every call went to someone worth talking to."
   },
   {
     name:"Property Radar", cat:"operations", glyph:"🏠",
@@ -511,6 +512,7 @@ function renderGrid(){
         </div>`:""}
         <div class="dcta">
           <button class="pill" onclick="event.stopPropagation(); openModal('${esc(t.name).replace(/'/g,"\\'")}')">Get more info</button>
+          <button class="pill ghost" onclick="closeCard(event)">Close</button>
           ${linkBtn}
         </div>
       </div>
@@ -519,7 +521,7 @@ function renderGrid(){
 }
 
 function openCard(idx){
-  document.querySelectorAll('.card.open').forEach(c=>c.classList.remove('open'));
+  document.querySelectorAll('.card.open,.card.closing').forEach(c=>c.classList.remove('open','closing'));
   const card = document.querySelector(`.card[data-idx="${idx}"]`);
   if(!card) return;
   card.classList.add('open');
@@ -533,8 +535,9 @@ function closeCard(e){
   if(e) e.stopPropagation();
   const openCards = document.querySelectorAll('.card.open');
   openCards.forEach(c=>{
+    c.classList.remove('open');
     c.classList.add('closing');
-    setTimeout(()=>{ c.classList.remove('open','closing'); },550);
+    setTimeout(()=>{ c.classList.remove('closing'); },750);
   });
 }
 function goTop(){ closeCard(); window.scrollTo({top:0, behavior:'smooth'}); }
