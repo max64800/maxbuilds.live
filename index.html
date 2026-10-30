@@ -179,6 +179,15 @@
   .success{text-align:center; padding:14px 0}
   .success .big{font-size:40px; margin-bottom:10px}
   @media(max-width:600px){.two{grid-template-columns:1fr}}
+  /* ---------- free blueprints band (YouTube ep 0) ---------- */
+  .bpband{background:var(--ink); color:#fff; border-radius:24px; padding:clamp(24px,4vw,40px); margin:0 0 48px; display:flex; gap:22px; align-items:center; justify-content:space-between; flex-wrap:wrap}
+  .bpband .label{color:rgba(255,255,255,.55); margin-bottom:10px}
+  .bpband h2{font-weight:800; font-size:clamp(24px,3.6vw,36px); letter-spacing:-.03em; line-height:1.08}
+  .bpband p{color:rgba(255,255,255,.72); font-size:15.5px; margin-top:10px; max-width:560px}
+  .bpband .bpbtns{display:flex; gap:10px; flex-wrap:wrap}
+  .bpband .pill{background:#fff; color:var(--ink); font-size:15px; padding:14px 22px}
+  .bpband .pill.ghost{background:transparent; color:#fff; border-color:rgba(255,255,255,.35)}
+  @media(max-width:600px){.bpband{margin-bottom:36px} .bpband .bpbtns,.bpband .pill{width:100%}}
 </style>
 </head>
 <body>
@@ -198,6 +207,19 @@
     <div class="bio">
       <span>Born in Ukraine, hardened by British weather, Canadian on paper, now building from Dubai.</span>
       <span class="langs">EN · UA · RUS</span>
+    </div>
+  </section>
+
+  <!-- Free blueprints from YouTube ep 0 ("8 AI Tools I Built for Business") -->
+  <section class="bpband" id="blueprints">
+    <div>
+      <div class="label">New · From the YouTube video</div>
+      <h2>Free blueprints from the video</h2>
+      <p>8 AI tools I built for business, from a Telegram lead finder to an AI video editor. Grab the PDFs and the copy-paste prompts to rebuild them.</p>
+    </div>
+    <div class="bpbtns">
+      <a class="pill" href="/blueprints/">Get the free blueprints →</a>
+      <a class="pill ghost" href="https://forms.gle/1pS2fZhSAEqH3bjy6" target="_blank" rel="noopener">Get a free tool built for your business</a>
     </div>
   </section>
 </main>
